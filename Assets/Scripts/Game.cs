@@ -12,7 +12,8 @@ public class Game : MonoBehaviour {
     public PowerupManager PowerupManager { get; private set; }
     public Level CurrentLevel { get; private set;}
 
-    public System.Action<bool> OnGamePaused;
+    public System.Action<bool> GamePaused;
+    public System.Action       GameRestart;
     
     private int m_Score = 0;
 
@@ -24,8 +25,8 @@ public class Game : MonoBehaviour {
             if (value != m_IsPaused) {
                 m_IsPaused = value;
 
-                if (OnGamePaused != null)
-                    OnGamePaused(m_IsPaused);
+                if (GamePaused != null)
+                    GamePaused(m_IsPaused);
 
                 Gui.Instance.ShowLeaderboard(m_IsPaused);
 
@@ -88,6 +89,9 @@ public class Game : MonoBehaviour {
         Gui.Instance.SetScore(m_Score = 0);
         
         Gui.Instance.ShowGameOver(false);
+
+        if (GameRestart != null)
+            GameRestart();
     }
 
     IEnumerator _UpdateScore() {

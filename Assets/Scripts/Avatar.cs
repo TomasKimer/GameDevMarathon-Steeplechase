@@ -15,12 +15,22 @@ public class Avatar : MonoBehaviour {
     // Use this for initialization
     void Start () {
 		animator = this.GetComponent<Animator>();
+        Game.Instance.GameRestart += OnGameRestart;
+    }
+
+    void OnDestroy() {
+        if (Game.Instance != null)
+            Game.Instance.GameRestart -= OnGameRestart;
     }
     
     // Update is called once per frame
     void Update () {
         DoMove();
         DoJump();
+    }
+
+    void OnGameRestart() {
+        transform.position = Vector3.zero;
     }
 
     void DoMove() {

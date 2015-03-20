@@ -25,7 +25,24 @@ public class CameraController : MonoBehaviour {
 
 		StartCoroutine("changeDirection");
 		StartCoroutine("shakeCam");
+
+        Game.Instance.GameRestart += OnGameRestart;
 	}
+
+    void OnDestroy() {
+        if (Game.Instance != null)
+            Game.Instance.GameRestart -= OnGameRestart;
+    }
+
+    void OnGameRestart() { 
+        this.transform.position = new Vector3(0, 0, offsetZ);
+		transform.rotation = Quaternion.identity;
+		originalRotation = transform.rotation;
+
+        StopAllCoroutines();
+        StartCoroutine("changeDirection");
+        StartCoroutine("shakeCam");
+    }
 
     void OnEnable() {
 		//StartCoroutine("changeDirection");
