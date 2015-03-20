@@ -65,7 +65,7 @@ public class CameraController : MonoBehaviour {
 	void Update(){
 		float newPos = movementTranslation.y + transform.position.y;
 
-		if((newPos >= verticalBounds.x) && (newPos <= verticalBounds.y)) {
+		if((newPos >= verticalBounds.x + 1) && (newPos <= verticalBounds.y + 1)) {
 			movementTranslation.y = 0;
 		}
 		transform.Translate(movementTranslation * Time.deltaTime * movementSpeed);  		                                           
