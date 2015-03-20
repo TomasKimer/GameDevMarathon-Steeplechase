@@ -18,11 +18,15 @@ public class Level : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		InstantiateWall (-15, 15);
-		InstantiateWall (-15, 15);
-		InstantiateWall (-15, 15);
-		InstantiateWall (-15, 15);
-		InstantiateWall (-15, 15);
+
+		// x = -5 .... x = 20
+		// y =  -5 .... y = + 5
+
+		for (int i=-5; i<=50; i+=8) {
+			createWallAtX(i, 65, 115);
+		}
+
+		//InstantiateWall (-15, 15);
 
 		wallPrefab.SetActive (false);
 
@@ -39,6 +43,13 @@ public class Level : MonoBehaviour {
 		Instantiate(wallPrefab, new Vector3(Random.Range(minPos, maxPos), Random.Range(minPos, maxPos), 0), 
 		            Quaternion.Euler (0, 0, (Random.Range(0, 180))));
 	}
+
+	void createWallAtX(int x, int rotMin, int rotMax){
+
+		Instantiate(wallPrefab, new Vector3(x, Random.Range(-30, -15), 0), 
+		            Quaternion.Euler (0, 0, (Random.Range(rotMin, rotMax))));
+	}
+
 
     void SetTint(Color color) {
         foreach (SpriteRenderer sr in m_groundSprites) {
