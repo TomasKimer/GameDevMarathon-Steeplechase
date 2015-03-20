@@ -51,6 +51,16 @@ public class Avatar : MonoBehaviour {
 			//stop walking
 			animator.SetInteger("walk", 0);
 		}
+
+		//attack
+		KeyCode attackKeyCode = KeyCode.LeftShift;
+		if(Input.GetKeyDown(attackKeyCode)) {
+			animator.SetInteger("attack", 1);
+		}
+		//stop attack
+		if(Input.GetKeyUp(attackKeyCode)) {
+			animator.SetInteger("attack", 0);
+		}
     }
 
     void DoJump() {

@@ -1,18 +1,18 @@
 fileFormatVersion: 2
 guid: 60450a615900b4252b04d790b68e6764
-timeCreated: 1426879967
+timeCreated: 1426891419
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: Butcher_0
-    21300002: Untitled_1
+    21300002: ButcherAttack_0
     21300004: Untitled_2
     21300006: Untitled_3
     21300008: Untitled_4
     21300010: Butcher_2
     21300012: Butcher_1
-    21300014: Butcher_sprite_0
-    21300016: Butcher_sprite_1
+    21300014: ButcherAttack_1
+    21300016: ButcherAttack_2
     21300018: Butcher_sprite_2
     21300020: Butcher_sprite_3
   serializedVersion: 2
@@ -70,7 +70,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Untitled_1
+    - name: ButcherAttack_0
       rect:
         serializedVersion: 2
         x: 87
@@ -130,7 +130,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Butcher_sprite_0
+    - name: ButcherAttack_1
       rect:
         serializedVersion: 2
         x: 88
@@ -140,7 +140,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Butcher_sprite_1
+    - name: ButcherAttack_2
       rect:
         serializedVersion: 2
         x: 91
