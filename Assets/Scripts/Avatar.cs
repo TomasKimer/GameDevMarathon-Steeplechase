@@ -39,6 +39,7 @@ public class Avatar : MonoBehaviour {
         }
 
         if (direction.x != 0f || direction.y != 0f) {
+			//start walking
 			animator.SetInteger("walk", 1);
 
             transform.position += direction.normalized * Time.deltaTime * moveSpeed;
@@ -47,6 +48,7 @@ public class Avatar : MonoBehaviour {
             transform.localRotation = Quaternion.AngleAxis(angle + 180f, Vector3.forward);
 
         } else {
+			//stop walking
 			animator.SetInteger("walk", 0);
 		}
     }
