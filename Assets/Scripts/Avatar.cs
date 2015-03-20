@@ -7,7 +7,7 @@ public class Avatar : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        
+
     }
     
     // Update is called once per frame
@@ -37,9 +37,7 @@ public class Avatar : MonoBehaviour {
         }
     }
 
-
     void OnCollisionEnter2D(Collision2D collision) {
-        Debug.Log("Collision enter: " + collision);
-    
+        //Debug.Log("Collision enter: " + collision);
     }
 }
