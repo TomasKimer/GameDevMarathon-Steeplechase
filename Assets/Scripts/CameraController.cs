@@ -6,13 +6,13 @@ public class CameraController : MonoBehaviour {
 	public int movementSpeed = 3;
 	public int rotationAngle = 15;
 	public int rotationSpeed = 3;
-	public Vector2 verticalBounds = new Vector2(5, -5);
+	public readonly float[] verticalBounds = {10f, -10f};
 
 	private Quaternion originalRotation;
 	private float offsetZ = -10f;
 	private int cameraChangeSeconds = 2;
 	private Vector3 movementTranslation;
-	
+
 	private int[] randomLevelsX = new int[] {1, 2};
 	private int[] randomLevelsY = new int[] {-1, 1};
 
@@ -24,7 +24,6 @@ public class CameraController : MonoBehaviour {
 		originalRotation = transform.rotation;
 
 		StartCoroutine("changeDirection");
-
 		StartCoroutine("shakeCam");
 	}
 	
@@ -40,22 +39,22 @@ public class CameraController : MonoBehaviour {
 	IEnumerator shakeCam() {
 		//int rotation = rotationAngle;
 		int negRotation = -1 * rotationAngle;
-		int deltaRotation = 0;
+		float deltaRotation = 0;
 		//int speed = rotationSpeed;
 		bool forward = true;
 		for(;;) {
 			if(deltaRotation < rotationAngle && forward) {
-				deltaRotation += rotationSpeed;
-				transform.rotation = Quaternion.Euler(originalRotation.eulerAngles.x, originalRotation.eulerAngles.y,
-				                                     originalRotation.eulerAngles.z + deltaRotation);
+				deltaRotation += rotationSpeed * Time.deltaTime;
 			} else if(deltaRotation >= negRotation){
 				forward = false;
-				deltaRotation -= rotationSpeed;
-				transform.rotation = Quaternion.Euler(originalRotation.eulerAngles.x, originalRotation.eulerAngles.y,
-				                                      originalRotation.eulerAngles.z + deltaRotation);
+				deltaRotation -= rotationSpeed * Time.deltaTime;
 			} else {
 				forward = true;
+				yield return null;
 			}
+
+			transform.rotation = Quaternion.Euler(originalRotation.eulerAngles.x, originalRotation.eulerAngles.y,
+			                                      originalRotation.eulerAngles.z + deltaRotation);
 
 			yield return null;
 		}
@@ -63,11 +62,12 @@ public class CameraController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update(){
-		float newPos = movementTranslation.y + transform.position.y;
+		float newPositionY = transform.position.y + movementTranslation.y;
 
-		if((newPos >= verticalBounds.x + 1) && (newPos <= verticalBounds.y + 1)) {
+		if(newPositionY >= verticalBounds[0] || newPositionY <= verticalBounds[1]) {
 			movementTranslation.y = 0;
 		}
-		transform.Translate(movementTranslation * Time.deltaTime * movementSpeed);  		                                           
+
+		transform.Translate(movementTranslation * Time.deltaTime * movementSpeed, Space.World); 
 	}
 }
