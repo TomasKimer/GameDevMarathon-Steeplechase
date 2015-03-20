@@ -32,7 +32,7 @@ public class ScoreManager : MonoBehaviour {
         while (true) {
             yield return new WaitForSeconds(scoreUpdateInterval);
             
-            if (!Game.Instance.IsPaused)
+            if (!Game.Instance.IsPaused && !Game.Instance.IsGameOver)
                 score++;
             text.text = score.ToString();
         }

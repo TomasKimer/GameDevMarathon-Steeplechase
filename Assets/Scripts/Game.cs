@@ -11,6 +11,12 @@ public class Game : MonoBehaviour {
             return m_IsPaused;
         }
         set {
+            if (value != m_IsPaused) {
+                m_IsPaused = value;
+
+                Gui.Instance.ShowLeaderboard(m_IsPaused);
+            }
+
             m_IsPaused = value;
         }
     }
@@ -20,7 +26,12 @@ public class Game : MonoBehaviour {
             return m_IsGameOver;
         }
         set {
-            m_IsGameOver = value;
+            if (value != m_IsGameOver) {
+                m_IsGameOver = value;
+
+                if (m_IsGameOver)
+                    OnGameOver();
+            }
         }
     }
 
@@ -42,11 +53,19 @@ public class Game : MonoBehaviour {
 	void Update () {
         if (Input.GetKeyDown(KeyCode.Escape)) {
             IsPaused = !IsPaused;
-
-            if (IsPaused)
-                Gui.Instance.leaderboard.gameObject.SetActive(true);
-            else
-                Gui.Instance.leaderboard.gameObject.SetActive(false);
         }
-	}
+        if (Input.GetKeyDown(KeyCode.R)) {
+            RestartGame();
+        }
+    }
+
+    void OnGameOver() {
+        Gui.Instance.ShowGameOver(true);
+    }
+
+    void RestartGame() {
+        IsGameOver = false;
+        
+        Gui.Instance.ShowGameOver(false);
+    }
 }
