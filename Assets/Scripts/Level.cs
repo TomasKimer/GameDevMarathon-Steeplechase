@@ -49,7 +49,7 @@ public class Level : MonoBehaviour {
 		for (int j = -size; j <= size; j++) {
 
 			for (int i=-size; i<=size; i++) {
-				Instantiate (groundPrefab, new Vector3 (i * groundTileSize, j * groundTileSize, -10), 
+				Instantiate (groundPrefab, new Vector3 (i * groundTileSize, j * groundTileSize, 10), 
 				            Quaternion.identity);
 
 			}
