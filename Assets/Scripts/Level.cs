@@ -4,13 +4,19 @@ using System.Collections;
 public class Level : MonoBehaviour {
 
 	private const float groundTileSize = 100;
+	private const int groundArea = 2;
 
-	public GameObject wallPrefab;
-    public GameObject groundPrefab;
-	public GameObject floorPrefab;
+	// ground sprites
+	public GameObject groundPrefab;
 
+	// wall prefabs
+	public GameObject wallShortPrefab;
+	public GameObject wallLongPrefab;
+	public GameObject wallUPrefab;
+	public GameObject wallLPrefab;
 
-    [Range(0.0f, 1.0f)]
+	
+	[Range(0.0f, 1.0f)]
     public float tintInterval = 0.12f;
 
     private SpriteRenderer[] m_groundSprites;
@@ -22,21 +28,12 @@ public class Level : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
+		CreateFloor ();
+		CreateWalls ();
 
 
-		CreateFloor (4);
 
-
-		// x = -5 .... x = 20
-		// y =  -5 .... y = + 5
-
-		for (int i=-5; i<=65; i+=3) {
-			createWallAtX(i, 65, 115);
-		}
-
-		//InstantiateWall (-15, 15);
-
-		wallPrefab.SetActive (false);
+		//wallPrefab.SetActive (false);
 
         m_groundSprites = GetComponentsInChildren<SpriteRenderer>();
         
@@ -46,40 +43,87 @@ public class Level : MonoBehaviour {
 	/**
 	 * Puts all the floor tiles in the scene
 	 */
-	void CreateFloor(int size){
+	void CreateFloor(){
 	
-		for (int j = -size; j <= size; j++) {
-
-			for (int i=-size; i<=size; i++) {
-				GameObject ground = Instantiate (groundPrefab, new Vector3 (i * groundTileSize, j * groundTileSize, 10), 
+		for (int j = -groundArea-1; j < groundArea+1; j++) {
+			for (int i=-groundArea+1; i<groundArea+1; i++) {
+				GameObject ground = Instantiate (groundPrefab, new Vector3 (j * groundTileSize, i * groundTileSize, 10), 
 				                                 Quaternion.identity) as GameObject;
                 ground.transform.parent = transform;
 			}
-
 		}
-
 	}
+	/**
+	 * Generates walls on the floor area
+	 */
+	void CreateWalls (){
+
+		int screenOffset = 40;
 
 
+		for (int j = -groundArea; j < groundArea; j++) {
+			for (int i=0; i<1; i++) {
+				// inside the floor sprite
+
+				float xOffset = 0;
+				float yOffset = 0;
+				int select = 0;
+				GameObject objectType;
+
+				for(int k=0; k<100; k+=8){
+					for(int l=0; l<100; l+=8){
+
+						xOffset = Random.Range(-3f, 3f);
+						yOffset = Random.Range(-3f, 3f);
+
+						select = Random.Range(0,10);
+						if(select < 3){
+							// long wall
+							objectType = wallShortPrefab;
+
+						} else if( select < 5) {
+							// U
+							objectType = wallUPrefab;
+						} else if (select < 8) {
+							// L
+							objectType = wallLPrefab;
+						} else {
+							// short wall
+							objectType = wallShortPrefab;
+						}
+
+
+						
+						// generate wall
+						GameObject wall = Instantiate (objectType, new Vector3 (j * groundTileSize + k + xOffset, 
+						                                                        i * groundTileSize - l + yOffset + screenOffset, 0), 
+						                               Quaternion.Euler (0, 0, (Random.Range(0, 359)))) as GameObject;
+						//wall.transform.parent = transform;
+					}
+				}
+			}
+		}
+		
+		
+	}
+	
+	
 	// Update is called once per frame
 	void Update () {
 	    
 	}
 
-	void InstantiateWall(int minPos, int maxPos){
-	
-		Instantiate(wallPrefab, new Vector3(Random.Range(minPos, maxPos), Random.Range(minPos, maxPos), 0), 
-		            Quaternion.Euler (0, 0, (Random.Range(0, 180))));
-	}
 
-	void createWallAtX(int x, int rotMin, int rotMax){
+	void createWallAtXY(int x, int y, int rotMin, int rotMax){
 
-		GameObject wall = Instantiate(wallPrefab, new Vector3(x, Random.Range(-55, -10), 0), 
+		GameObject wall = Instantiate(wallLongPrefab, new Vector3(x, Random.Range(-55, -10), 0), 
 		            Quaternion.Euler (0, 0, (Random.Range(rotMin, rotMax)))) as GameObject;
         
         //wall.transform.parent = transform;
         wall.SetActive(true);
 	}
+
+
 
 
     void SetTint(Color color) {
