@@ -31,8 +31,9 @@ public class ScoreManager : MonoBehaviour {
     IEnumerator _UpdateScore() {
         while (true) {
             yield return new WaitForSeconds(scoreUpdateInterval);
-
-            score++;
+            
+            if (!GameController.Instance.IsPaused)
+                score++;
             text.text = score.ToString();
         }
     }
