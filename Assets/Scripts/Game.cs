@@ -1,17 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GameController : MonoBehaviour {
+public class Game : MonoBehaviour {
 
-    public  static GameController Instance { get { return m_Instance; } private set { m_Instance = value; } }
-    private static GameController m_Instance;
+    public  static Game Instance { get { return m_Instance; } private set { m_Instance = value; } }
+    private static Game m_Instance;
 
     public bool IsPaused { get; set; }
+    public bool IsGameOver { get; set; }
 
     public Leaderboard m_Leaderboard;
 
     void Awake() {
-        Debug.Log("GameController Init");
+        Debug.Log("Game.Init");
 
         m_Instance = this;
 
