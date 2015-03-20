@@ -9,9 +9,11 @@ public class Avatar : MonoBehaviour {
 
     private bool isInJump = false;
 
+	private Animator animator;
+
     // Use this for initialization
     void Start () {
-
+		animator = this.GetComponent<Animator>();
     }
     
     // Update is called once per frame
@@ -37,11 +39,16 @@ public class Avatar : MonoBehaviour {
         }
 
         if (direction.x != 0f || direction.y != 0f) {
+			animator.SetInteger("walk", 1);
+
             transform.position += direction.normalized * Time.deltaTime * moveSpeed;
 
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             transform.localRotation = Quaternion.AngleAxis(angle + 180f, Vector3.forward);
-        }
+
+        } else {
+			animator.SetInteger("walk", 0);
+		}
     }
 
     void DoJump() {
