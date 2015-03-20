@@ -4,6 +4,7 @@ using System.Collections;
 public class Avatar : MonoBehaviour {
 
     public float moveSpeed = 10.0f;
+    public float jumpScale = 2.0f;
 
     // Use this for initialization
     void Start () {
@@ -12,7 +13,11 @@ public class Avatar : MonoBehaviour {
     
     // Update is called once per frame
     void Update () {
-        
+        DoMove();
+        DoJump();
+    }
+
+    void DoMove() {
         Vector3 direction = new Vector3();
          
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) {
@@ -29,11 +34,29 @@ public class Avatar : MonoBehaviour {
         }
 
         if (direction.x != 0f || direction.y != 0f) {
-            Transform tr = GetComponent<Transform>();
-            tr.position += direction.normalized * Time.deltaTime * moveSpeed;
+            transform.position += direction.normalized * Time.deltaTime * moveSpeed;
 
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            tr.localRotation = Quaternion.AngleAxis(angle + 180, Vector3.forward);
+            transform.localRotation = Quaternion.AngleAxis(angle + 180, Vector3.forward);
+        }
+    }
+
+    void DoJump() {
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            StartCoroutine(_Jump());//transform.localScale = new Vector3(jumpScale, jumpScale, 1.0f);
+        }
+    }
+
+    IEnumerator _Jump() {
+        float scale = transform.localScale.x;
+        while (transform.localScale.x < jumpScale) {
+            transform.localScale = new Vector3(transform.localScale.x + Time.deltaTime * 2.0f, transform.localScale.x + Time.deltaTime * 2.0f, 1.0f);
+            yield return new WaitForEndOfFrame();
+        }
+
+        while (transform.localScale.x > 1.0f) {
+            transform.localScale = new Vector3(transform.localScale.x - Time.deltaTime * 2.0f, transform.localScale.x - Time.deltaTime * 2.0f, 1.0f);
+            yield return new WaitForEndOfFrame();
         }
     }
 
