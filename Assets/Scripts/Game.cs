@@ -6,8 +6,6 @@ public class Game : MonoBehaviour {
     public  static Game Instance { get { return m_Instance; } private set { m_Instance = value; } }
     private static Game m_Instance;
 
-    public Leaderboard m_Leaderboard;
-
     public bool IsPaused   {
         get {
             return m_IsPaused;
@@ -33,8 +31,6 @@ public class Game : MonoBehaviour {
         Debug.Log("Game.Init");
 
         m_Instance = this;
-
-        m_Leaderboard.gameObject.SetActive(false);
     }
 
 	// Use this for initialization
@@ -48,9 +44,9 @@ public class Game : MonoBehaviour {
             IsPaused = !IsPaused;
 
             if (IsPaused)
-                m_Leaderboard.gameObject.SetActive(true);
+                Gui.Instance.leaderboard.gameObject.SetActive(true);
             else
-                m_Leaderboard.gameObject.SetActive(false);
+                Gui.Instance.leaderboard.gameObject.SetActive(false);
         }
 	}
 }
