@@ -6,6 +6,11 @@ public class Game : MonoBehaviour {
     public  static Game Instance { get { return m_Instance; } private set { m_Instance = value; } }
     private static Game m_Instance;
 
+    [Range(0.1f, 5.0f)]
+    public  float scoreUpdateInterval = 1f;
+    
+    private int m_Score = 0;
+
     public bool IsPaused   {
         get {
             return m_IsPaused;
@@ -45,8 +50,8 @@ public class Game : MonoBehaviour {
     }
 
 	// Use this for initialization
-	void Start () {
-	
+	void Start () {	    
+        StartCoroutine( _UpdateScore() );
 	}
 	
 	// Update is called once per frame
@@ -66,6 +71,19 @@ public class Game : MonoBehaviour {
     void RestartGame() {
         IsGameOver = false;
         
+        Gui.Instance.SetScore(m_Score = 0);
+        
         Gui.Instance.ShowGameOver(false);
+    }
+
+    IEnumerator _UpdateScore() {
+        while (true) {
+            yield return new WaitForSeconds(scoreUpdateInterval);
+            
+            if (!IsPaused && !IsGameOver)
+            {
+                Gui.Instance.SetScore(++m_Score);
+            }
+        }
     }
 }

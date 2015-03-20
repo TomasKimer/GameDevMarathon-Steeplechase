@@ -9,12 +9,14 @@ public class Gui : MonoBehaviour {
     private static Gui m_Instance;
 
     private Leaderboard m_Leaderboard;
+    private Text m_TextScore;
     private Text m_TextGameOver;
 
     void Awake() {
         m_Instance = this;
 
         m_Leaderboard  = this.GetChild<Leaderboard>("Leaderboard");
+        m_TextScore    = this.GetChild<Text>("ScoreText");
         m_TextGameOver = this.GetChild<Text>("TextGameOver");
     }
 
@@ -27,6 +29,11 @@ public class Gui : MonoBehaviour {
 	void Update () {
 	
 	}
+
+    public void SetScore(int score) {
+        if (m_TextScore != null)
+            m_TextScore.text = score.ToString();
+    }
 
     public void ShowGameOver(bool show) {
         if (m_TextGameOver != null)
