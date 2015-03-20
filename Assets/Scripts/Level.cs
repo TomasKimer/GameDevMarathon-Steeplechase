@@ -58,10 +58,10 @@ public class Level : MonoBehaviour {
 	 */
 	void CreateWalls (){
 
-		int screenOffset = 40;
+		int screenOffset = 17;
 
 
-		for (int j = -groundArea; j < groundArea; j++) {
+		for (int j = -groundArea-1; j < groundArea+1; j++) {
 			for (int i=0; i<1; i++) {
 				// inside the floor sprite
 
@@ -74,7 +74,7 @@ public class Level : MonoBehaviour {
 				float ycoord = 0; 
 
 				for(int k=0; k<100; k+=8){
-					for(int l=0; l<100; l+=8){
+					for(int l=0; l<40; l+=8){
 
 						xOffset = Random.Range(-3f, 3f);
 						yOffset = Random.Range(-3f, 3f);
