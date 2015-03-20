@@ -22,7 +22,7 @@ public class Level : MonoBehaviour {
 		// x = -5 .... x = 20
 		// y =  -5 .... y = + 5
 
-		for (int i=-5; i<=50; i+=8) {
+		for (int i=-5; i<=50; i+=5) {
 			createWallAtX(i, 65, 115);
 		}
 
@@ -46,7 +46,7 @@ public class Level : MonoBehaviour {
 
 	void createWallAtX(int x, int rotMin, int rotMax){
 
-		Instantiate(wallPrefab, new Vector3(x, Random.Range(-30, -15), 0), 
+		Instantiate(wallPrefab, new Vector3(x, Random.Range(-35, -10), 0), 
 		            Quaternion.Euler (0, 0, (Random.Range(rotMin, rotMax))));
 	}
 
