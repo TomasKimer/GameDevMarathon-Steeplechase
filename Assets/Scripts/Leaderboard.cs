@@ -37,10 +37,10 @@ public class Leaderboard : MonoBehaviour {
     }
 
     void OnEnable() {
-        Debug.Log("Leaderboard enable");
+        
     }
 
     void OnDisable() {
-        Debug.Log("Leaderboard disable");
+        
     }
 }
