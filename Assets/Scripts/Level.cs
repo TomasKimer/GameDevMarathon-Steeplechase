@@ -16,7 +16,7 @@ public class Level : MonoBehaviour {
     private SpriteRenderer[] m_groundSprites;
 
     void Awake() {
-        m_groundSprites = groundPrefab.GetComponentsInChildren<SpriteRenderer>();
+
     }
 
 	// Use this for initialization
@@ -38,6 +38,8 @@ public class Level : MonoBehaviour {
 
 		wallPrefab.SetActive (false);
 
+        m_groundSprites = GetComponentsInChildren<SpriteRenderer>();
+        
         StartCoroutine( _TintRepeated() );
 	}
 
@@ -49,9 +51,9 @@ public class Level : MonoBehaviour {
 		for (int j = -size; j <= size; j++) {
 
 			for (int i=-size; i<=size; i++) {
-				Instantiate (groundPrefab, new Vector3 (i * groundTileSize, j * groundTileSize, 10), 
-				            Quaternion.identity);
-
+				GameObject ground = Instantiate (groundPrefab, new Vector3 (i * groundTileSize, j * groundTileSize, 10), 
+				                                 Quaternion.identity) as GameObject;
+                ground.transform.parent = transform;
 			}
 
 		}
@@ -72,8 +74,11 @@ public class Level : MonoBehaviour {
 
 	void createWallAtX(int x, int rotMin, int rotMax){
 
-		Instantiate(wallPrefab, new Vector3(x, Random.Range(-55, -10), 0), 
-		            Quaternion.Euler (0, 0, (Random.Range(rotMin, rotMax))));
+		GameObject wall = Instantiate(wallPrefab, new Vector3(x, Random.Range(-55, -10), 0), 
+		            Quaternion.Euler (0, 0, (Random.Range(rotMin, rotMax)))) as GameObject;
+        
+        //wall.transform.parent = transform;
+        wall.SetActive(true);
 	}
 
 
