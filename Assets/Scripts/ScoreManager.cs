@@ -23,8 +23,10 @@ public class ScoreManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		score += 1;
+
 		// Set the displayed text to be the word "Score" followed by the score value.
-		text.text = "Score: " + score;
+		text.text = score.ToString();
 
 	}
 }
