@@ -6,7 +6,7 @@ public class CameraController : MonoBehaviour {
 	public int movementSpeed = 3;
 	public int rotationAngle = 15;
 	public int rotationSpeed = 10;
-	public readonly float[] verticalBounds = {10f, -10f};
+	public static float[] verticalBounds = {10f, -10f};
 
 	private Quaternion originalRotation;
 	private float offsetZ = -10f;
