@@ -30,7 +30,7 @@ public class Leaderboard : MonoBehaviour {
             newItemGO.GetComponent<RectTransform>().SetParent(m_List.gameObject.transform, false);
             
             Text newItem = newItemGO.GetComponent<Text>();
-            newItem.text = i + ". " + ((7-i) * 5 + Random.Range(1, 4));
+            newItem.text = i + ".    " + ((7-i) * 5 + Random.Range(1, 4));
 
             newItem.gameObject.SetActive(true);
         }
