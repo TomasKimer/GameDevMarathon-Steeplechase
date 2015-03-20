@@ -4,10 +4,11 @@ using System.Collections;
 
 public class ScoreManager : MonoBehaviour {
 
+    public float scoreUpdateInterval = 1f;
+
 	public static int score;        // The player's score.
 
 	Text text;                      // Reference to the Text component.
-
 
 	// Use this for initialization
 	void Awake () {
@@ -17,16 +18,22 @@ public class ScoreManager : MonoBehaviour {
 		
 		// Reset the score.
 		score = 0;
+        text.text = score.ToString();
 
+        StartCoroutine( _UpdateScore() );
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-		score += 1;
+    }
 
-		// Set the displayed text to be the word "Score" followed by the score value.
-		text.text = score.ToString();
+    IEnumerator _UpdateScore() {
+        while (true) {
+            yield return new WaitForSeconds(scoreUpdateInterval);
 
-	}
+            score++;
+            text.text = score.ToString();
+        }
+    }
 }
