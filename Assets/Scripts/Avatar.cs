@@ -85,4 +85,8 @@ public class Avatar : MonoBehaviour {
 //          Physics2D.IgnoreCollision(GetComponent<Collider2D>(), collision.gameObject.GetComponent<Collider2D>());        
         //Debug.Log("Collision enter: " + collision);
     }
+
+    void OnBecameInvisible() {
+        Game.Instance.IsGameOver = true;
+    }
 }

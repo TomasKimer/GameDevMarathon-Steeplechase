@@ -6,10 +6,28 @@ public class Game : MonoBehaviour {
     public  static Game Instance { get { return m_Instance; } private set { m_Instance = value; } }
     private static Game m_Instance;
 
-    public bool IsPaused { get; set; }
-    public bool IsGameOver { get; set; }
-
     public Leaderboard m_Leaderboard;
+
+    public bool IsPaused   {
+        get {
+            return m_IsPaused;
+        }
+        set {
+            m_IsPaused = value;
+        }
+    }
+
+    public bool IsGameOver {
+        get {
+            return m_IsGameOver;
+        }
+        set {
+            m_IsGameOver = value;
+        }
+    }
+
+    private bool m_IsPaused   = false;
+    private bool m_IsGameOver = false;
 
     void Awake() {
         Debug.Log("Game.Init");
