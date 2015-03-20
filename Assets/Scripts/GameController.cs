@@ -8,13 +8,13 @@ public class GameController : MonoBehaviour {
 
     public bool IsPaused { get; set; }
 
-    private Leaderboard m_Leaderboard = null;
+    public Leaderboard m_Leaderboard;
 
     void Awake() {
         Debug.Log("GameController Init");
 
         m_Instance = this;
-        m_Leaderboard = GameObject.Find("HUDCanvas/Leaderboard").GetComponent<Leaderboard>();
+
         m_Leaderboard.gameObject.SetActive(false);
     }
 
