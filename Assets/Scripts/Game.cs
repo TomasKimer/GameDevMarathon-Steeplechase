@@ -9,7 +9,8 @@ public class Game : MonoBehaviour {
     [Range(0.1f, 5.0f)]
     public  float scoreUpdateInterval = 1f;
 
-    public PowerupManager PowerupManager { get; private set;}
+    public PowerupManager PowerupManager { get; private set; }
+    public Level CurrentLevel { get; private set;}
 
     public System.Action<bool> OnGamePaused;
     
@@ -61,7 +62,9 @@ public class Game : MonoBehaviour {
     }
 
 	// Use this for initialization
-	void Start () {	    
+	void Start () {	  
+        CurrentLevel = GameObject.Find("/Level").GetComponent<Level>();
+
         StartCoroutine( _UpdateScore() );
 	}
 	

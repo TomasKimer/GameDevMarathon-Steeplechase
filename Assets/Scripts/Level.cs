@@ -31,7 +31,7 @@ public class Level : MonoBehaviour {
 		CreateFloor ();
 		CreateWalls ();
 
-
+        //Game.Instance.PowerupManager.GeneratePowerup(PowerupManager.E_PowerupType.PowerDownJump, Vector3.zero, Quaternion.identity);
 
 		//wallPrefab.SetActive (false);
 
