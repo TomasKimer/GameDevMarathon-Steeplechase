@@ -36,4 +36,10 @@ public class Avatar : MonoBehaviour {
             tr.localRotation = Quaternion.AngleAxis(angle + 180, Vector3.forward);
         }
     }
+
+
+    void OnCollisionEnter2D(Collision2D collision) {
+        Debug.Log("Collision enter: " + collision);
+    
+    }
 }
