@@ -3,8 +3,12 @@ using System.Collections;
 
 public class Level : MonoBehaviour {
 
+	private const float groundTileSize = 100;
+
 	public GameObject wallPrefab;
     public GameObject groundPrefab;
+	public GameObject floorPrefab;
+
 
     [Range(0.0f, 1.0f)]
     public float tintInterval = 0.12f;
@@ -19,10 +23,14 @@ public class Level : MonoBehaviour {
 	void Start () {
 
 
+
+		CreateFloor (4);
+
+
 		// x = -5 .... x = 20
 		// y =  -5 .... y = + 5
 
-		for (int i=-5; i<=50; i+=5) {
+		for (int i=-5; i<=65; i+=3) {
 			createWallAtX(i, 65, 115);
 		}
 
@@ -32,7 +40,25 @@ public class Level : MonoBehaviour {
 
         StartCoroutine( _TintRepeated() );
 	}
+
+	/**
+	 * Puts all the floor tiles in the scene
+	 */
+	void CreateFloor(int size){
 	
+		for (int j = -size; j <= size; j++) {
+
+			for (int i=-size; i<=size; i++) {
+				Instantiate (groundPrefab, new Vector3 (i * groundTileSize, j * groundTileSize, -10), 
+				            Quaternion.identity);
+
+			}
+
+		}
+
+	}
+
+
 	// Update is called once per frame
 	void Update () {
 	    
@@ -46,7 +72,7 @@ public class Level : MonoBehaviour {
 
 	void createWallAtX(int x, int rotMin, int rotMax){
 
-		Instantiate(wallPrefab, new Vector3(x, Random.Range(-35, -10), 0), 
+		Instantiate(wallPrefab, new Vector3(x, Random.Range(-55, -10), 0), 
 		            Quaternion.Euler (0, 0, (Random.Range(rotMin, rotMax))));
 	}
 
