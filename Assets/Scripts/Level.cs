@@ -70,6 +70,9 @@ public class Level : MonoBehaviour {
 				int select = 0;
 				GameObject objectType;
 
+				float xcoord = 0;
+				float ycoord = 0; 
+
 				for(int k=0; k<100; k+=8){
 					for(int l=0; l<100; l+=8){
 
@@ -92,11 +95,17 @@ public class Level : MonoBehaviour {
 							objectType = wallShortPrefab;
 						}
 
+						xcoord = j * groundTileSize + k + xOffset;
+						ycoord = i * groundTileSize - l + yOffset + screenOffset;
 
-						
+						if(Mathf.Abs(xcoord) < 10 && Mathf.Abs(ycoord) < 10){
+							Debug.Log("Negeneruji!!!!!!" + "x: " + xcoord + "y: " + ycoord);
+							continue;
+						}
+
 						// generate wall
-						GameObject wall = Instantiate (objectType, new Vector3 (j * groundTileSize + k + xOffset, 
-						                                                        i * groundTileSize - l + yOffset + screenOffset, 0), 
+						GameObject wall = Instantiate (objectType, new Vector3 (xcoord, 
+						                                                        ycoord, 10), 
 						                               Quaternion.Euler (0, 0, (Random.Range(0, 359)))) as GameObject;
 						//wall.transform.parent = transform;
 					}
