@@ -6,6 +6,8 @@ public class Avatar : MonoBehaviour {
     public float moveSpeed = 10.0f;
     public float jumpScale = 2.0f;
 
+    private bool isInJump = false;
+
     // Use this for initialization
     void Start () {
 
@@ -42,12 +44,14 @@ public class Avatar : MonoBehaviour {
     }
 
     void DoJump() {
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            StartCoroutine(_Jump());//transform.localScale = new Vector3(jumpScale, jumpScale, 1.0f);
+        if (Input.GetKeyDown(KeyCode.Space) && !isInJump) {
+           StartCoroutine(_Jump());//transform.localScale = new Vector3(jumpScale, jumpScale, 1.0f);
         }
     }
 
     IEnumerator _Jump() {
+        isInJump = true;
+
         float scale = transform.localScale.x;
         while (transform.localScale.x < jumpScale) {
             transform.localScale = new Vector3(transform.localScale.x + Time.deltaTime * 2.0f, transform.localScale.x + Time.deltaTime * 2.0f, 1.0f);
@@ -58,6 +62,8 @@ public class Avatar : MonoBehaviour {
             transform.localScale = new Vector3(transform.localScale.x - Time.deltaTime * 2.0f, transform.localScale.x - Time.deltaTime * 2.0f, 1.0f);
             yield return new WaitForEndOfFrame();
         }
+
+        isInJump = false;
     }
 
     void OnCollisionEnter2D(Collision2D collision) {
