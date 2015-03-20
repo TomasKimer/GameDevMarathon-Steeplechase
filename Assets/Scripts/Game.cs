@@ -8,6 +8,8 @@ public class Game : MonoBehaviour {
 
     [Range(0.1f, 5.0f)]
     public  float scoreUpdateInterval = 1f;
+
+    public System.Action<bool> OnGamePaused;
     
     private int m_Score = 0;
 
@@ -19,10 +21,13 @@ public class Game : MonoBehaviour {
             if (value != m_IsPaused) {
                 m_IsPaused = value;
 
-                Gui.Instance.ShowLeaderboard(m_IsPaused);
-            }
+                if (OnGamePaused != null)
+                    OnGamePaused(m_IsPaused);
 
-            m_IsPaused = value;
+                Gui.Instance.ShowLeaderboard(m_IsPaused);
+
+                GameObject.Find("/Camera").GetComponent<CameraController>().enabled = !m_IsPaused;
+            }
         }
     }
 
@@ -36,6 +41,8 @@ public class Game : MonoBehaviour {
 
                 if (m_IsGameOver)
                     OnGameOver();
+
+                GameObject.Find("/Camera").GetComponent<CameraController>().enabled = !m_IsGameOver;
             }
         }
     }

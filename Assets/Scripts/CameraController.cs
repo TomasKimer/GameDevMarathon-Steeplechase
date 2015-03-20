@@ -26,6 +26,15 @@ public class CameraController : MonoBehaviour {
 		StartCoroutine("changeDirection");
 		StartCoroutine("shakeCam");
 	}
+
+    void OnEnable() {
+		//StartCoroutine("changeDirection");
+		//StartCoroutine("shakeCam");
+    }
+
+    void OnDisable() {
+        //StopAllCoroutines();
+    }
 	
 	IEnumerator changeDirection() {
 		for(;;) {
