@@ -29,8 +29,9 @@ public class Game : MonoBehaviour {
                     GamePaused(m_IsPaused);
 
                 Gui.Instance.ShowLeaderboard(m_IsPaused);
-
-                GameObject.Find("/Camera").GetComponent<CameraController>().enabled = !m_IsPaused;
+                
+                if (Camera.main != null)
+                    Camera.main.GetComponentInParent<CameraController>().enabled = !m_IsPaused;
             }
         }
     }
@@ -46,7 +47,8 @@ public class Game : MonoBehaviour {
                 if (m_IsGameOver)
                     OnGameOver();
 
-                GameObject.Find("/Camera").GetComponent<CameraController>().enabled = !m_IsGameOver;
+                if (Camera.main != null)
+                    Camera.main.GetComponentInParent<CameraController>().enabled = !m_IsGameOver;
             }
         }
     }
