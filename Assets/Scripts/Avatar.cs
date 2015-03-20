@@ -4,6 +4,7 @@ using System.Collections;
 public class Avatar : MonoBehaviour {
 
     public float moveSpeed = 10.0f;
+    public float moveSpeedJumpScale = 0.5f;
     public float jumpScale = 2.0f;
     public float jumpSpeed = 5.0f;
 
@@ -76,6 +77,9 @@ public class Avatar : MonoBehaviour {
         float originalScale = transform.localScale.x;
         float originalScaleZ = transform.localScale.z;
         float currentJumpScale = originalScale;
+        
+        float originalMoveSpeed = moveSpeed;
+        moveSpeed *= moveSpeedJumpScale;
 
         // jump up
         while (currentJumpScale < jumpScale) {
@@ -97,22 +101,11 @@ public class Avatar : MonoBehaviour {
 
         GetComponent<Collider2D>().enabled = true;
         isInJump = false;
+        moveSpeed = originalMoveSpeed;
     }
 
     void OnCollisionEnter2D(Collision2D collision) {
-        if (collision.gameObject.name.Equals("Steak")) {
-            Game.Instance.PowerupManager.HasCameraPowerUp = true;
-            collision.gameObject.SetActive(false);
-        }
-        if (collision.gameObject.name.Equals("Steak2")) {
-            Game.Instance.PowerupManager.HasJumpPowerDown = true;
-            collision.gameObject.SetActive(false);
-        }
-            
-
-//      if (isInJump)
-//          Physics2D.IgnoreCollision(GetComponent<Collider2D>(), collision.gameObject.GetComponent<Collider2D>());        
-        //Debug.Log("Collision enter: " + collision);
+        Game.Instance.PowerupManager.ProcessCollision(collision.gameObject);
     }
 
     void OnBecameInvisible() {

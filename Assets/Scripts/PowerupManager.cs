@@ -38,4 +38,20 @@ public class PowerupManager : MonoBehaviour {
 
         return Instantiate(prefab, pos, rot) as GameObject;
     }
+
+    public bool ProcessCollision(GameObject other) {
+        if (other.name.Equals("Steak")) {
+            HasCameraPowerUp = true;
+            other.SetActive(false);
+            return true;
+        }
+        
+        if (other.name.Equals("Steak2")) {
+            HasJumpPowerDown = true;
+            other.SetActive(false);
+            return true;
+        }
+
+        return false;
+    }
 }
