@@ -54,7 +54,7 @@ public class Avatar : MonoBehaviour {
     }
 
     void DoJump() {
-        if (Input.GetKeyDown(KeyCode.Space) && !isInJump) {
+        if (Input.GetKeyDown(KeyCode.Space) && !isInJump && !Game.Instance.PowerupManager.HasJumpPowerDown) {
            StartCoroutine(_Jump());
         }
     }
@@ -90,6 +90,16 @@ public class Avatar : MonoBehaviour {
     }
 
     void OnCollisionEnter2D(Collision2D collision) {
+        if (collision.gameObject.name.Equals("Steak")) {
+            Game.Instance.PowerupManager.HasCameraPowerUp = true;
+            collision.gameObject.SetActive(false);
+        }
+        if (collision.gameObject.name.Equals("Steak2")) {
+            Game.Instance.PowerupManager.HasJumpPowerDown = true;
+            collision.gameObject.SetActive(false);
+        }
+            
+
 //      if (isInJump)
 //          Physics2D.IgnoreCollision(GetComponent<Collider2D>(), collision.gameObject.GetComponent<Collider2D>());        
         //Debug.Log("Collision enter: " + collision);

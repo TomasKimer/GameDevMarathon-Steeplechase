@@ -9,6 +9,8 @@ public class Game : MonoBehaviour {
     [Range(0.1f, 5.0f)]
     public  float scoreUpdateInterval = 1f;
 
+    public PowerupManager PowerupManager { get; private set;}
+
     public System.Action<bool> OnGamePaused;
     
     private int m_Score = 0;
@@ -54,6 +56,8 @@ public class Game : MonoBehaviour {
         Debug.Log("Game.Init");
 
         m_Instance = this;
+
+        PowerupManager = GetComponent<PowerupManager>();
     }
 
 	// Use this for initialization
