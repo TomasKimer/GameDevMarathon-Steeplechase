@@ -10,7 +10,7 @@ public class Game : MonoBehaviour {
     public  float scoreUpdateInterval = 1f;
 
     public PowerupManager PowerupManager { get; private set; }
-    public Level CurrentLevel { get; private set;}
+    public int CurrentLevel { get; set;}
 
     public System.Action<bool> GamePaused;
     public System.Action       GameRestart;
@@ -65,9 +65,7 @@ public class Game : MonoBehaviour {
     }
 
 	// Use this for initialization
-	void Start () {	  
-        CurrentLevel = GameObject.Find("/Level").GetComponent<Level>();
-
+	void Start () {
         StartCoroutine( _UpdateScore() );
 	}
 	
@@ -87,6 +85,7 @@ public class Game : MonoBehaviour {
 
     void RestartGame() {
         IsGameOver = false;
+        CurrentLevel = 0;
         
         Gui.Instance.SetScore(m_Score = 0);
         
@@ -103,6 +102,14 @@ public class Game : MonoBehaviour {
             if (!IsPaused && !IsGameOver)
             {
                 Gui.Instance.SetScore(++m_Score);
+
+                int newLevel = m_Score / 10;
+
+                if (newLevel > CurrentLevel)
+                {
+                    CurrentLevel = newLevel;
+                    Debug.Log("Level UP: " + CurrentLevel);
+                }
             }
         }
     }
