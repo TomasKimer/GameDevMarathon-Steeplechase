@@ -73,8 +73,8 @@ public class Level : MonoBehaviour {
 				float xcoord = 0;
 				float ycoord = 0; 
 
-				for(int k=0; k<100; k+=8){
-					for(int l=0; l<40; l+=8){
+				for(int k=0; k<=100; k+=10){
+					for(int l=0; l<=40; l+=10){
 
 						xOffset = Random.Range(-3f, 3f);
 						yOffset = Random.Range(-3f, 3f);
