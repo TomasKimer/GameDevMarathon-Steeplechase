@@ -3,6 +3,9 @@ using System.Collections;
 
 public class Avatar : MonoBehaviour {
 
+    public AudioClip jumpSound;
+    public AudioClip powerupSound;
+
     public float moveSpeed = 10.0f;
     public float moveSpeedJumpScale = 0.5f;
     public float jumpScale = 2.0f;
@@ -11,10 +14,13 @@ public class Avatar : MonoBehaviour {
     private bool isInJump = false;
 
 	private Animator animator;
+    private AudioSource audioSource;
 
     // Use this for initialization
     void Start () {
 		animator = this.GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
+
         Game.Instance.GameRestart += OnGameRestart;
     }
 
@@ -78,6 +84,7 @@ public class Avatar : MonoBehaviour {
 
     void DoJump() {
         if (Input.GetKeyDown(KeyCode.Space) && !isInJump && !Game.Instance.PowerupManager.IsPowerupActive(PowerupManager.E_PowerupType.PowerDownJump)) {
+           audioSource.PlayOneShot(jumpSound);
            StartCoroutine(_Jump());
         }
     }
@@ -117,7 +124,8 @@ public class Avatar : MonoBehaviour {
     }
 
     void OnCollisionEnter2D(Collision2D collision) {
-        Game.Instance.PowerupManager.ProcessCollision(collision.gameObject);
+        if (Game.Instance.PowerupManager.ProcessCollision(collision.gameObject))
+            audioSource.PlayOneShot(powerupSound);
     }
 
     void OnBecameInvisible() {
