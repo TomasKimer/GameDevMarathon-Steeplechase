@@ -8,14 +8,14 @@ public class Gui : MonoBehaviour {
     public  static Gui Instance { get { return m_Instance; } private set { m_Instance = value; } }
     private static Gui m_Instance;
 
-    private Leaderboard m_Leaderboard;
+    private GuiLeaderboard m_Leaderboard;
     private Text m_TextScore;
     private Text m_TextGameOver;
 
     void Awake() {
         m_Instance = this;
 
-        m_Leaderboard  = this.GetChild<Leaderboard>("Leaderboard");
+        m_Leaderboard  = this.GetChild<GuiLeaderboard>("Leaderboard");
         m_TextScore    = this.GetChild<Text>("ScoreText");
         m_TextGameOver = this.GetChild<Text>("TextGameOver");
     }

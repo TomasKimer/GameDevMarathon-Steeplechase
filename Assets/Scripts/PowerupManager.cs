@@ -75,10 +75,6 @@ public class PowerupManager : MonoBehaviour {
         return false;
     }
 
-    IEnumerator _UsePowerup(E_PowerupType type) {
-        yield break;
-    }
-
     void RemovePowerUpCamera() {
         RemovePowerup(E_PowerupType.PowerUpCamera);
     }

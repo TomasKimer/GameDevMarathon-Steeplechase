@@ -10,12 +10,14 @@ public class Game : MonoBehaviour {
     public  float scoreUpdateInterval = 1f;
 
     public PowerupManager PowerupManager { get; private set; }
+    public Leaderboard Leaderboard { get { return m_Leaderboard; } }
     public int CurrentLevel { get; set;}
 
     public System.Action<bool> GamePaused;
     public System.Action       GameRestart;
     
     private int m_Score = 0;
+    private Leaderboard m_Leaderboard = new Leaderboard();
 
     public bool IsPaused   {
         get {
@@ -80,6 +82,8 @@ public class Game : MonoBehaviour {
     }
 
     void OnGameOver() {
+        m_Leaderboard.Add(m_Score);
+
         Gui.Instance.ShowGameOver(true);
     }
 

@@ -1,46 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.UI;
+using System.Collections.Generic;
 
-public class Leaderboard : MonoBehaviour {
+public class Leaderboard {
 
-    private VerticalLayoutGroup m_List;
-    private Text m_TextItem;
+    const int MAX_ITEMS = 7;
 
-    void Awake() {
-        m_List = GetComponentInChildren<VerticalLayoutGroup>();
-        m_TextItem = m_List.GetComponentInChildren<Text>();
+    public List<int> Scores { get { return m_Scores; } }
 
-        m_TextItem.gameObject.SetActive(false);
+    private List<int> m_Scores = new List<int>(MAX_ITEMS);
+
+    public void Add(int score) {
+        m_Scores.Add(score);
     }
 
-	// Use this for initialization
-	void Start () {
-	    GenerateFake();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
-    void GenerateFake() {
-        for (int i = 1; i <= 7; ++i) {
-            GameObject newItemGO = Instantiate(m_TextItem.gameObject);
-            newItemGO.GetComponent<RectTransform>().SetParent(m_List.gameObject.transform, false);
-            
-            Text newItem = newItemGO.GetComponent<Text>();
-            newItem.text = i + ".    " + ((7-i) * 5 + Random.Range(1, 4));
-
-            newItem.gameObject.SetActive(true);
-        }
-    }
-
-    void OnEnable() {
+    void Save() {
         
     }
 
-    void OnDisable() {
-        
+    void Load() {
+
     }
 }
