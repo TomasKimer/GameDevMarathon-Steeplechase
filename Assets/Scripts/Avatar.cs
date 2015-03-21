@@ -139,6 +139,6 @@ public class Avatar : MonoBehaviour
 
 	void OnBecameInvisible ()
 	{
-		//Game.Instance.IsGameOver = true;
+		Game.Instance.IsGameOver = true;
 	}
 }
