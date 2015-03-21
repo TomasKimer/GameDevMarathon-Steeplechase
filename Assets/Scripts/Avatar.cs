@@ -53,6 +53,7 @@ public class Avatar : MonoBehaviour
 	{
 		transform.position = Vector3.zero;
 		lives = maxLives;
+		animator.SetInteger ("death", 0);
 	}
 
 	void DoMove ()
