@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Avatar : MonoBehaviour {
 
-    public AudioClip jumpSound;
+    public AudioClip[] jumpSounds;
     public AudioClip powerupSound;
 
     public float moveSpeed = 10.0f;
@@ -84,7 +84,7 @@ public class Avatar : MonoBehaviour {
 
     void DoJump() {
         if (Input.GetKeyDown(KeyCode.Space) && !isInJump && !Game.Instance.PowerupManager.IsPowerupActive(PowerupManager.E_PowerupType.PowerDownJump)) {
-           audioSource.PlayOneShot(jumpSound);
+           audioSource.PlayOneShot(jumpSounds[Random.Range(0, jumpSounds.Length)]);
            StartCoroutine(_Jump());
         }
     }
