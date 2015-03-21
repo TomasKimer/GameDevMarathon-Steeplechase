@@ -165,7 +165,7 @@ public class Level : MonoBehaviour
 						
 						// generate powerup
 						Game.Instance.PowerupManager.GeneratePowerup (powerupType, 
-						                                             new Vector3 (xcoord, ycoord, 10), Quaternion.identity);
+						                                             new Vector3 (xcoord, ycoord, 5), Quaternion.identity);
 						//wall.transform.parent = transform;
 					}
 				}
