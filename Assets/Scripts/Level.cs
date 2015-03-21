@@ -84,7 +84,7 @@ public class Level : MonoBehaviour
 					for (int l=0; l<=40; l+=20) {
 
 						xOffset = Random.Range (-wallRandomness, wallRandomness);
-						yOffset = Random.Range (-wallRandomness, wallRandomness);
+						yOffset = Random.Range (-10, 10);
 
 						select = Random.Range (0, 10);
 						if (select < 3) {
