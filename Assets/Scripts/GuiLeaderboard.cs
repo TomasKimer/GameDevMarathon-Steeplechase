@@ -29,12 +29,6 @@ public class GuiLeaderboard : MonoBehaviour {
         DestroyItems();
     }
 
-    void GenerateFake() {
-        for (int i = 1; i <= 7; ++i) {
-            CreateItem(i, (7-i) * 5 + Random.Range(1, 4));
-        }
-    }
-
     void CreateItems() {
         for (int i = 0; i < m_Leaderboard.Scores.Count; ++i)
             CreateItem(i+1, m_Leaderboard.Scores[i]);
@@ -58,6 +52,12 @@ public class GuiLeaderboard : MonoBehaviour {
                 continue;
             
             Object.Destroy(item.gameObject);
+        }
+    }
+
+    void GenerateFake() {
+        for (int i = 1; i <= 7; ++i) {
+            CreateItem(i, (7-i) * 5 + Random.Range(1, 4));
         }
     }
 }

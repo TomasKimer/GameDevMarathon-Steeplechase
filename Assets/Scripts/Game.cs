@@ -64,6 +64,7 @@ public class Game : MonoBehaviour {
         m_Instance = this;
 
         PowerupManager = GetComponent<PowerupManager>();
+        m_Leaderboard.Load();
     }
 
 	// Use this for initialization
