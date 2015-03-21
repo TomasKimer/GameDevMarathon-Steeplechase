@@ -77,7 +77,7 @@ public class Avatar : MonoBehaviour {
     }
 
     void DoJump() {
-        if (Input.GetKeyDown(KeyCode.Space) && !isInJump && !Game.Instance.PowerupManager.HasJumpPowerDown) {
+        if (Input.GetKeyDown(KeyCode.Space) && !isInJump && !Game.Instance.PowerupManager.IsPowerupActive(PowerupManager.E_PowerupType.PowerDownJump)) {
            StartCoroutine(_Jump());
         }
     }

@@ -195,7 +195,7 @@ public class Level : MonoBehaviour {
 
     IEnumerator _TintRepeated() {
         for (;;) {
-            if (Game.Instance.PowerupManager.HasCameraPowerUp) {
+            if (Game.Instance.PowerupManager.IsPowerupActive(PowerupManager.E_PowerupType.PowerUpCamera)) {
                 float c = Random.Range(0f, 1f);
                 SetTint(new Color(c, c, c));
             }
