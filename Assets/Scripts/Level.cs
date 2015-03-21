@@ -118,6 +118,7 @@ public class Level : MonoBehaviour {
 
 	void CreatePowerUps(){
 		int screenOffset = 17;
+		GameObject powerup;
 		
 		
 		for (int j = -groundArea-1; j < groundArea+1; j++) {
@@ -139,7 +140,7 @@ public class Level : MonoBehaviour {
 						yOffset = Random.Range(-6f, 6f);
 						
 						select = Random.Range(0,10);
-						if(select < 7){
+						if(select < 6){
 							// camera powerup
 							powerupType = PowerupManager.E_PowerupType.PowerUpCamera;
 
@@ -157,7 +158,7 @@ public class Level : MonoBehaviour {
 						}
 						
 						// generate powerup
-						Game.Instance.PowerupManager.GeneratePowerup(PowerupManager.E_PowerupType.PowerDownJump, 
+						Game.Instance.PowerupManager.GeneratePowerup(powerupType, 
 						                                             new Vector3 (xcoord,ycoord, 10), Quaternion.identity);
 						//wall.transform.parent = transform;
 					}
