@@ -147,7 +147,7 @@ public class Avatar : MonoBehaviour
 		enemy.die ();
 	}
 
-	void OnCollisionEnter2D (Collision2D collision)
+	void OnCollisionStay2D (Collision2D collision)
 	{
 		if (Game.Instance.PowerupManager.ProcessCollision (collision.gameObject))
 			audioSource.PlayOneShot (powerupSound);

@@ -11,7 +11,9 @@ public class Enemy : MonoBehaviour
 
 	private bool killed = false;
 	private Collision2D currCollision;
-
+	private Animator animator;
+	private int[] deathAnimations = new int[] {1, 2};
+	
 	void Awake ()
 	{
 		//!!!!set target to follow
@@ -21,13 +23,13 @@ public class Enemy : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-	
+		animator = GetComponent<Animator> ();
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
-		if (!Game.Instance.IsGameOver && !Game.Instance.IsPaused && followTarget != null) {
+		if (!Game.Instance.IsGameOver && !Game.Instance.IsPaused && followTarget != null && !killed) {
 			Vector3 nTransform = followTarget.transform.position - transform.position;
 		
 			//make sure its of magnitude 1.		
@@ -37,23 +39,20 @@ public class Enemy : MonoBehaviour
 		}
 	}
 
-//	void killAvatar (Avatar avatar)
-//	{
-//		avatar.die ();
-//	}
-
 	public void die ()
 	{
 		killed = true;
 		Debug.Log ("ENEMY MRTVY");
+		animator.SetInteger ("death", deathAnimations [Random.Range (0, deathAnimations.Length)]);
 	}
 
 	IEnumerator killAvatar ()
 	{
-		yield return new WaitForSeconds (5f);
-		if (!killed) {
+		yield return new WaitForSeconds (2f);
+		if (!killed && !Game.Instance.IsEasyMode) {
 			//killAvatar (currCollision.gameObject.GetComponent<Avatar> ());
 			Avatar avatar = currCollision.gameObject.GetComponent<Avatar> ();
+
 			avatar.die ();
 		}
 		yield break;

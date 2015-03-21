@@ -6,16 +6,28 @@ public class EnemyInit : MonoBehaviour
 {
 
 	public GameObject enemyObject;
-	public int nrEnemies = 5;
+	public int nrEnemies = 50;
 	public int spawnDistance = 1;
-	public int spawnRate = 5;
+	public int spawnRate = 2;
 
 	// Use this for initialization
 	void Start ()
 	{
+		Game.Instance.GameRestart += OnGameRestart;
 		StartCoroutine ("spawnEnemies");
 	}
 
+	void OnGameRestart ()
+	{
+		Enemy[] enemies = FindObjectsOfType (typeof(Enemy)) as Enemy[];
+		foreach (Enemy enemy in enemies) {
+			Destroy (enemy.gameObject);
+		}
+
+		StopCoroutine ("spawnEnemies");
+		StartCoroutine ("spawnEnemies");
+	}
+	
 	IEnumerator spawnEnemies ()
 	{
 		int i = 1;
