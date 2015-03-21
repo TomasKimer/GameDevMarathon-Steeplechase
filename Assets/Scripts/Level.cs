@@ -146,14 +146,10 @@ public class Level : MonoBehaviour
 						
 						xOffset = Random.Range (-6f, 6f);
 						yOffset = Random.Range (-6f, 6f);
-						
-<<<<<<< HEAD
+
 						select = Random.Range(0,10);
 						if(select < 6){
-=======
-						select = Random.Range (0, 10);
-						if (select < 7) {
->>>>>>> origin/master
+
 							// camera powerup
 							powerupType = PowerupManager.E_PowerupType.PowerUpCamera;
 
@@ -171,13 +167,9 @@ public class Level : MonoBehaviour
 						}
 						
 						// generate powerup
-<<<<<<< HEAD
 						Game.Instance.PowerupManager.GeneratePowerup(powerupType, 
 						                                             new Vector3 (xcoord,ycoord, 10), Quaternion.identity);
-=======
-						Game.Instance.PowerupManager.GeneratePowerup (PowerupManager.E_PowerupType.PowerDownJump, 
-						                                             new Vector3 (xcoord, ycoord, 10), Quaternion.identity);
->>>>>>> origin/master
+
 						//wall.transform.parent = transform;
 					}
 				}
