@@ -57,7 +57,7 @@ public class PowerupManager : MonoBehaviour {
             
             CancelInvoke("RemovePowerUpCamera");
             SetPowerupActive(E_PowerupType.PowerUpCamera);
-            Invoke("RemovePowerUpCamera", 1.0f);
+            Invoke("RemovePowerUpCamera", 5.0f);
 
             return true;
         }
@@ -67,7 +67,7 @@ public class PowerupManager : MonoBehaviour {
 
             CancelInvoke("RemovePowerDownJump");
             SetPowerupActive(E_PowerupType.PowerDownJump);
-            Invoke("RemovePowerDownJump", 1.0f);
+            Invoke("RemovePowerDownJump", 2.0f);
 
             return true;
         }

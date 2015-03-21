@@ -157,7 +157,7 @@ public class Level : MonoBehaviour {
 						}
 						
 						// generate powerup
-						Game.Instance.PowerupManager.GeneratePowerup(PowerupManager.E_PowerupType.PowerDownJump, 
+						Game.Instance.PowerupManager.GeneratePowerup(powerupType, 
 						                                             new Vector3 (xcoord,ycoord, 10), Quaternion.identity);
 						//wall.transform.parent = transform;
 					}
