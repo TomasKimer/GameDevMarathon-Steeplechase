@@ -18,7 +18,7 @@ public class Leaderboard {
         m_Scores.Sort((a, b) => -a.CompareTo(b));
         
         if (m_Scores.Count > MAX_ITEMS) {
-            m_Scores.RemoveRange(MAX_ITEMS - 1, m_Scores.Count - MAX_ITEMS);
+            m_Scores.RemoveRange(MAX_ITEMS, m_Scores.Count - MAX_ITEMS);
         }
         
         Save();
