@@ -36,17 +36,20 @@ public class PowerupManager : MonoBehaviour {
                 break;
         }
 
-        return Instantiate(prefab, pos, rot) as GameObject;
+        GameObject powerup = Instantiate(prefab, pos, rot) as GameObject;
+        powerup.name = type.ToString();
+
+        return powerup;
     }
 
     public bool ProcessCollision(GameObject other) {
-        if (other.name.Equals("Steak")) {
+        if (other.name.Equals(E_PowerupType.PowerUpCamera.ToString())) {
             HasCameraPowerUp = true;
             other.SetActive(false);
             return true;
         }
         
-        if (other.name.Equals("Steak2")) {
+        if (other.name.Equals(E_PowerupType.PowerDownJump.ToString())) {
             HasJumpPowerDown = true;
             other.SetActive(false);
             return true;
