@@ -124,7 +124,7 @@ public class Game : MonoBehaviour
 
 				if (newLevel > CurrentLevel) {
 					CurrentLevel = newLevel;
-					Debug.Log ("Level UP: " + CurrentLevel);
+//					Debug.Log ("Level UP: " + CurrentLevel);
 				}
 			}
 		}

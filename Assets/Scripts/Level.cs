@@ -106,7 +106,7 @@ public class Level : MonoBehaviour
 						ycoord = i * groundTileSize - l + yOffset + screenOffset;
 
 						if (Mathf.Abs (xcoord) < 10 && Mathf.Abs (ycoord) < 10) {
-							Debug.Log ("Negeneruji!!!!!!" + "x: " + xcoord + "y: " + ycoord);
+//							Debug.Log ("Negeneruji!!!!!!" + "x: " + xcoord + "y: " + ycoord);
 							continue;
 						}
 
