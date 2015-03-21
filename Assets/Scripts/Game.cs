@@ -11,7 +11,9 @@ public class Game : MonoBehaviour {
 
     public PowerupManager PowerupManager { get; private set; }
     public Leaderboard Leaderboard { get { return m_Leaderboard; } }
-    public int CurrentLevel { get; set;}
+    
+    public int  CurrentLevel { get; set;}
+    public bool IsEasyMode   { get; set; }
 
     public System.Action<bool> GamePaused;
     public System.Action       GameRestart;
