@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: d64058951754e4e949ed483a29a9f216
-timeCreated: 1426905815
+timeCreated: 1426924615
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -131,10 +131,10 @@ TextureImporter:
     - name: Enemy_6
       rect:
         serializedVersion: 2
-        x: 0
-        y: 50
-        width: 25
-        height: 25
+        x: 1
+        y: 52
+        width: 22
+        height: 21
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
