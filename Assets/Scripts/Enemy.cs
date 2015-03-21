@@ -3,11 +3,19 @@ using System.Collections;
 
 public class Enemy : MonoBehaviour
 {
+//	[SerializeField]
+	public GameObject  followTarget;
 
-	public GameObject avatar;
-	public float moveSpeed = 1.0f;
+	//public GameObject FollowTarget{ get { return followTarget; } set { followTarget = value; } }
+	public float movementSpeed = 1f;
 
 	//private Transform playerPos;
+
+	void Awake ()
+	{
+		//!!!!set target to follow
+		followTarget = GameObject.Find ("/Avatar");
+	}
 
 	// Use this for initialization
 	void Start ()
@@ -18,10 +26,13 @@ public class Enemy : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		transform.LookAt (avatar.transform.position, new Vector3 (0, 0, 1));
-		//TODO!!!!!!!!
-		//transform.LookAt(new Vector3(a))
+		if (!Game.Instance.IsGameOver && !Game.Instance.IsPaused && followTarget != null) {
+			Vector3 nTransform = followTarget.transform.position - transform.position;
+		
+			//make sure its of magnitude 1.		
+			nTransform.Normalize ();
 
-		transform.position += transform.forward * Time.deltaTime * moveSpeed;
+			transform.Translate (nTransform * Time.deltaTime * movementSpeed, Space.World); 
+		}
 	}
 }
