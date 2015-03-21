@@ -14,7 +14,7 @@ public class Avatar : MonoBehaviour
 	public float jumpSpeed = 5.0f;
 
 	public int maxLives = 3;
-	private int lives = maxLives;
+	private int lives;
 
 	private bool isInJump = false;
 
@@ -28,6 +28,8 @@ public class Avatar : MonoBehaviour
 	{
 		animator = this.GetComponent<Animator> ();
 		audioSource = GetComponent<AudioSource> ();
+
+		lives = maxLives;
 
 		Game.Instance.GameRestart += OnGameRestart;
 	}
