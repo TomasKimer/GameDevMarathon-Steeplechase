@@ -21,12 +21,11 @@ public class EnemyInit : MonoBehaviour
 		int i = 1;
 		while (i <= nrEnemies) {
 			int camPosXWidth = (int)(Camera.main.transform.position.x + Camera.main.rect.width);
-			Debug.Log ("pos" + camPosXWidth);
+
 			if (camPosXWidth % spawnRate == 0) {
 				Enemy e = Instantiate (enemyObject, new Vector3 (camPosXWidth, Random.Range (CameraController.verticalBounds [1], 
 				                                                                   CameraController.verticalBounds [0]), 1), Quaternion.identity) as Enemy; 
 				i++;
-				Debug.Log ("picaaa" + i);
 			}
 			yield return new WaitForSeconds (1);
 		}

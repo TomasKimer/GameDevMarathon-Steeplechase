@@ -17,6 +17,8 @@ public class Avatar : MonoBehaviour
 	private Animator animator;
 	private AudioSource audioSource;
 
+	private KeyCode attackKeyCode = KeyCode.LeftShift;
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -35,7 +37,7 @@ public class Avatar : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		if (!Game.Instance.IsGameOver) {
+		if (!Game.Instance.IsGameOver || Game.Instance.IsPaused) {
 			DoMove ();
 			DoJump ();
 		}
@@ -78,7 +80,6 @@ public class Avatar : MonoBehaviour
 		}
 
 		//attack
-		KeyCode attackKeyCode = KeyCode.LeftShift;
 		if (Input.GetKeyDown (attackKeyCode)) {
 			animator.SetInteger ("attack", 1);
 		}
@@ -131,10 +132,28 @@ public class Avatar : MonoBehaviour
 		moveSpeed = originalMoveSpeed;
 	}
 
+	public void die ()
+	{
+		Debug.Log ("AVATAR MRTVY");
+		//TODO animace
+		Game.Instance.IsGameOver = true;
+	}
+
+	void killEnemy (Enemy enemy)
+	{
+		enemy.die ();
+	}
+
 	void OnCollisionEnter2D (Collision2D collision)
 	{
 		if (Game.Instance.PowerupManager.ProcessCollision (collision.gameObject))
 			audioSource.PlayOneShot (powerupSound);
+
+		if (collision.gameObject.name.StartsWith ("Enemy")) {
+			if (Input.GetKey (attackKeyCode)) {
+				killEnemy (collision.gameObject.GetComponent<Enemy> ());
+			}					
+		}
 	}
 
 	void OnBecameInvisible ()

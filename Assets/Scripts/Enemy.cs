@@ -9,7 +9,8 @@ public class Enemy : MonoBehaviour
 	//public GameObject FollowTarget{ get { return followTarget; } set { followTarget = value; } }
 	public float movementSpeed = 1f;
 
-	//private Transform playerPos;
+	private bool killed = false;
+	private Collision2D currCollision;
 
 	void Awake ()
 	{
@@ -35,4 +36,40 @@ public class Enemy : MonoBehaviour
 			transform.Translate (nTransform * Time.deltaTime * movementSpeed, Space.World); 
 		}
 	}
+
+//	void killAvatar (Avatar avatar)
+//	{
+//		avatar.die ();
+//	}
+
+	public void die ()
+	{
+		killed = true;
+		Debug.Log ("ENEMY MRTVY");
+	}
+
+	IEnumerator killAvatar ()
+	{
+		yield return new WaitForSeconds (5f);
+		if (!killed) {
+			//killAvatar (currCollision.gameObject.GetComponent<Avatar> ());
+			Avatar avatar = currCollision.gameObject.GetComponent<Avatar> ();
+			avatar.die ();
+		}
+		yield break;
+	}
+
+	void OnCollisionEnter2D (Collision2D collision)
+	{
+		if (collision.gameObject.name == "Avatar") {
+			currCollision = collision;
+			StartCoroutine ("killAvatar");
+//			new WaitForSeconds (10f);
+//			if (!killed) {
+//				killAvatar (collision.gameObject.GetComponent<Avatar> ());
+//			}			
+		}
+
+	}
+
 }
