@@ -139,16 +139,18 @@ public class Avatar : MonoBehaviour
 		moveSpeed = originalMoveSpeed;
 	}
 
-	public void die ()
+	public void die (bool outOfScreen)
 	{
-		lives--;
-		if (lives == 0) {
-			audioSource.PlayOneShot (dieSounds [Random.Range (0, dieSounds.Length)]);
-
-			Debug.Log ("AVATAR MRTVY");
-			//TODO animace
-			Game.Instance.IsGameOver = true;
+		audioSource.PlayOneShot (dieSounds [Random.Range (0, dieSounds.Length)]);
+		if (!outOfScreen) {
+			lives--;
+			if (lives <= 0) {
+				Debug.Log ("AVATAR MRTVY");
+				animator.SetInteger ("death", 1);			
+			}
 		}
+
+		Game.Instance.IsGameOver = true;
 	}
 
 	void killEnemy (Enemy enemy)
@@ -170,6 +172,7 @@ public class Avatar : MonoBehaviour
 
 	void OnBecameInvisible ()
 	{
-		die ();
+		//true -- avatar out of the screen
+		die (true);
 	}
 }

@@ -53,7 +53,8 @@ public class Enemy : MonoBehaviour
 			//killAvatar (currCollision.gameObject.GetComponent<Avatar> ());
 			Avatar avatar = currCollision.gameObject.GetComponent<Avatar> ();
 
-			avatar.die ();
+			//false -- avatar dies on screen, not out of the screen
+			avatar.die (false);
 		}
 		yield break;
 	}
