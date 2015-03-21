@@ -42,13 +42,13 @@ public class Enemy : MonoBehaviour
 	public void die ()
 	{
 		killed = true;
-		Debug.Log ("ENEMY MRTVY");
+//		Debug.Log ("ENEMY MRTVY");
 		animator.SetInteger ("death", deathAnimations [Random.Range (0, deathAnimations.Length)]);
 	}
 
 	IEnumerator killAvatar ()
 	{
-		yield return new WaitForSeconds (2f);
+		yield return new WaitForSeconds (0.5f);
 		if (!killed && !Game.Instance.IsEasyMode) {
 			//killAvatar (currCollision.gameObject.GetComponent<Avatar> ());
 			Avatar avatar = currCollision.gameObject.GetComponent<Avatar> ();
