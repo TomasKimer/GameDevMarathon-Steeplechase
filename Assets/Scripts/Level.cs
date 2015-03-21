@@ -34,6 +34,7 @@ public class Level : MonoBehaviour
 
 		CreateFloor ();
 		CreateWalls ();
+		CreatePowerUps ();
 
 		//Game.Instance.PowerupManager.GeneratePowerup(PowerupManager.E_PowerupType.PowerDownJump, Vector3.zero, Quaternion.identity);
 
@@ -120,6 +121,59 @@ public class Level : MonoBehaviour
 		}
 		
 		
+	}
+
+	void CreatePowerUps ()
+	{
+		int screenOffset = 17;
+		
+		
+		for (int j = -groundArea-1; j < groundArea+1; j++) {
+			for (int i=0; i<1; i++) {
+				// inside the floor sprite
+				
+				float xOffset = 0;
+				float yOffset = 0;
+				int select = 0;
+				PowerupManager.E_PowerupType powerupType;
+				
+				float xcoord = 0;
+				float ycoord = 0; 
+				
+				for (int k=0; k<=100; k+=15) {
+					for (int l=0; l<=40; l+=15) {
+						
+						xOffset = Random.Range (-6f, 6f);
+						yOffset = Random.Range (-6f, 6f);
+						
+						select = Random.Range (0, 10);
+						if (select < 7) {
+							// camera powerup
+							powerupType = PowerupManager.E_PowerupType.PowerUpCamera;
+
+						} else {
+							// down jump
+							powerupType = PowerupManager.E_PowerupType.PowerDownJump;
+						}
+						
+						xcoord = j * groundTileSize + k + xOffset;
+						ycoord = i * groundTileSize - l + yOffset + screenOffset;
+						
+						if (Mathf.Abs (xcoord) < 5 && Mathf.Abs (ycoord) < 5) {
+							Debug.Log ("Negeneruji!!!!!!" + "x: " + xcoord + "y: " + ycoord);
+							continue;
+						}
+						
+						// generate powerup
+						Game.Instance.PowerupManager.GeneratePowerup (PowerupManager.E_PowerupType.PowerDownJump, 
+						                                             new Vector3 (xcoord, ycoord, 10), Quaternion.identity);
+						//wall.transform.parent = transform;
+					}
+				}
+			}
+		}
+
+
 	}
 	
 	

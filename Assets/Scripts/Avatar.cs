@@ -25,8 +25,10 @@ public class Avatar : MonoBehaviour {
     
     // Update is called once per frame
     void Update () {
-        DoMove();
-        DoJump();
+        if (!Game.Instance.IsGameOver) {
+            DoMove();
+            DoJump();
+        }
     }
 
     void OnGameRestart() {
