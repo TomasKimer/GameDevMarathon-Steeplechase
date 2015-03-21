@@ -6,6 +6,7 @@ public class Level : MonoBehaviour
 
 	private const float groundTileSize = 100;
 	private const int groundArea = 2;
+	private const float wallRandomness = 2f;
 
 	// ground sprites
 	public GameObject groundPrefab;
@@ -82,8 +83,8 @@ public class Level : MonoBehaviour
 				for (int k=0; k<=100; k+=10) {
 					for (int l=0; l<=40; l+=10) {
 
-						xOffset = Random.Range (-3f, 3f);
-						yOffset = Random.Range (-3f, 3f);
+						xOffset = Random.Range (-wallRandomness, wallRandomness);
+						yOffset = Random.Range (-wallRandomness, wallRandomness);
 
 						select = Random.Range (0, 10);
 						if (select < 3) {
