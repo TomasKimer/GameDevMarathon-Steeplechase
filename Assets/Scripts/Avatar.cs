@@ -142,11 +142,12 @@ public class Avatar : MonoBehaviour
 
 	public void die (bool outOfScreen)
 	{
+//		Debug.Log (outOfScreen);
 		audioSource.PlayOneShot (dieSounds [Random.Range (0, dieSounds.Length)]);
 		if (!outOfScreen) {
 			lives--;
 			if (lives <= 0) {
-				Debug.Log ("AVATAR MRTVY");
+//				Debug.Log ("AVATAR MRTVY");
 				animator.SetInteger ("death", 1);			
 			}
 		}
