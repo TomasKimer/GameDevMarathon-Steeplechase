@@ -6,12 +6,15 @@ public class Avatar : MonoBehaviour
 
 	public AudioClip[] jumpSounds;
 	public AudioClip powerupSound;
-    public AudioClip[] dieSounds;
+	public AudioClip[] dieSounds;
 
 	public float moveSpeed = 10.0f;
 	public float moveSpeedJumpScale = 0.5f;
 	public float jumpScale = 2.0f;
 	public float jumpSpeed = 5.0f;
+
+	public int maxLives = 3;
+	private int lives = maxLives;
 
 	private bool isInJump = false;
 
@@ -47,6 +50,7 @@ public class Avatar : MonoBehaviour
 	void OnGameRestart ()
 	{
 		transform.position = Vector3.zero;
+		lives = maxLives;
 	}
 
 	void DoMove ()
@@ -135,11 +139,14 @@ public class Avatar : MonoBehaviour
 
 	public void die ()
 	{
-        audioSource.PlayOneShot(dieSounds [Random.Range (0, dieSounds.Length)]);
+		lives--;
+		if (lives == 0) {
+			audioSource.PlayOneShot (dieSounds [Random.Range (0, dieSounds.Length)]);
 
-		Debug.Log ("AVATAR MRTVY");
-		//TODO animace
-		Game.Instance.IsGameOver = true;
+			Debug.Log ("AVATAR MRTVY");
+			//TODO animace
+			Game.Instance.IsGameOver = true;
+		}
 	}
 
 	void killEnemy (Enemy enemy)
@@ -161,6 +168,6 @@ public class Avatar : MonoBehaviour
 
 	void OnBecameInvisible ()
 	{
-		die();
+		die ();
 	}
 }
