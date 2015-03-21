@@ -24,7 +24,10 @@ public class CameraController : MonoBehaviour
 
     private CameraSettings m_CurrentSettings {
         get {
-            return m_CameraSettings[Mathf.Min(Game.Instance.CurrentLevel, m_CameraSettings.Length - 1)];
+            if (Game.Instance.IsEasyMode)
+                return m_CameraSettings[0];
+            else
+                return m_CameraSettings[Mathf.Min(Game.Instance.CurrentLevel, m_CameraSettings.Length - 1)];
         }
     }
 

@@ -11,13 +11,17 @@ public class Gui : MonoBehaviour {
     private GuiLeaderboard m_Leaderboard;
     private Text m_TextScore;
     private Text m_TextGameOver;
+    private Toggle m_ToggleEasyMode;
 
     void Awake() {
         m_Instance = this;
 
-        m_Leaderboard  = this.GetChild<GuiLeaderboard>("Leaderboard");
-        m_TextScore    = this.GetChild<Text>("ScoreText");
-        m_TextGameOver = this.GetChild<Text>("TextGameOver");
+        m_Leaderboard    = this.GetChild<GuiLeaderboard>("Leaderboard");
+        m_TextScore      = this.GetChild<Text>("ScoreText");
+        m_TextGameOver   = this.GetChild<Text>("TextGameOver");
+        m_ToggleEasyMode = this.GetChild<Toggle>("ToggleEasyMode");
+
+        m_ToggleEasyMode.onValueChanged.AddListener( (isOn) => { Game.Instance.IsEasyMode = isOn; });
     }
 
 	// Use this for initialization
@@ -42,7 +46,10 @@ public class Gui : MonoBehaviour {
 
     public void ShowLeaderboard(bool show) {
         if (m_Leaderboard != null)
+        {
             m_Leaderboard.gameObject.SetActive(show);
+            m_ToggleEasyMode.gameObject.SetActive(show);
+        }
     }
 
 }
