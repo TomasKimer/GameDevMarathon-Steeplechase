@@ -81,7 +81,7 @@ public class Level : MonoBehaviour
 				float ycoord = 0; 
 
 				for (int k=0; k<=100; k+=10) {
-					for (int l=0; l<=40; l+=10) {
+					for (int l=0; l<=40; l+=20) {
 
 						xOffset = Random.Range (-wallRandomness, wallRandomness);
 						yOffset = Random.Range (-wallRandomness, wallRandomness);
