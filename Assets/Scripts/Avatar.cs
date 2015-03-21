@@ -6,6 +6,7 @@ public class Avatar : MonoBehaviour
 
 	public AudioClip[] jumpSounds;
 	public AudioClip powerupSound;
+    public AudioClip[] dieSounds;
 
 	public float moveSpeed = 10.0f;
 	public float moveSpeedJumpScale = 0.5f;
@@ -134,6 +135,8 @@ public class Avatar : MonoBehaviour
 
 	public void die ()
 	{
+        audioSource.PlayOneShot(dieSounds [Random.Range (0, dieSounds.Length)]);
+
 		Debug.Log ("AVATAR MRTVY");
 		//TODO animace
 		Game.Instance.IsGameOver = true;
@@ -158,6 +161,6 @@ public class Avatar : MonoBehaviour
 
 	void OnBecameInvisible ()
 	{
-		Game.Instance.IsGameOver = true;
+		die();
 	}
 }
